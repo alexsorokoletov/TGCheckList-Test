@@ -1,4 +1,6 @@
-﻿using Xamarin.Forms;
+﻿using System.Collections.Generic;
+using Microsoft.AppCenter.Analytics;
+using Xamarin.Forms;
 
 namespace TGCheckList
 {
@@ -22,6 +24,10 @@ namespace TGCheckList
 
             var ratingValue = ratingStepper.Value;
             var message = $"Your rating {ratingValue} for {pizzaPlace} accepted!";
+            Analytics.TrackEvent("NewRating", new Dictionary<string, string>() {
+                    {"Place", pizzaPlace},
+                    {"Rating", ratingValue.ToString()}
+            });
             DisplayAlert("Pizza rating", message, "OK");
         }
     }
